@@ -20,6 +20,7 @@ group :development, :test do
   gem 'multi_json'
   gem 'ZenTest', '<=4.8.3'
   gem 'autotest-rails'
+  gem 'factory_girl_rails'
 end
 group :production do
   gem 'pg'

@@ -29,7 +29,7 @@ class MoviesController < ApplicationController
 
     if params[:ratings] != session[:ratings] and @selected_ratings != {}
       session[:sort] = sort
-      session[:ratings] = @selected_ratings
+      session[:ratings] = @selected_ratings 
       flash.keep
       redirect_to :sort => sort, :ratings => @selected_ratings and return
     end
@@ -42,7 +42,6 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.create!(params[:movie])
-    debugger
     flash[:notice] = "#{@movie.title} was successfully created."
     redirect_to movies_path
   end
@@ -58,11 +57,15 @@ class MoviesController < ApplicationController
     redirect_to movie_path(@movie)
   end
 
-  def destroy
+  def destroy 
     @movie = Movie.find(params[:id])
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
+  
+   def search_similar_movies
+     @movies = Movie.search_similar_movies(params[:id])
+   end
 
 end
